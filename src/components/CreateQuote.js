@@ -35,6 +35,7 @@ const CreateQupte = () => {
       <h2>Crear Quote</h2>
       <form onSubmit={e => handleFormSubmit(e)}>
         <input
+          required
           type='text'
           placeholder='Author'
           name='author'
@@ -42,6 +43,7 @@ const CreateQupte = () => {
           onChange={e => onInputChange(e)}
         />
         <textarea
+          required
           cols='30'
           rows='10'
           name='body'
@@ -49,6 +51,7 @@ const CreateQupte = () => {
           value={body}
           onChange={e => onInputChange(e)}></textarea>
         <input
+          required
           type='text'
           placeholder='Source'
           name='source'
