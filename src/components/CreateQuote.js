@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import axios from 'axios';
 
 const CreateQupte = () => {
   const [formData, setFormData] = useState({
@@ -8,13 +9,23 @@ const CreateQupte = () => {
   });
   const { author, body, source } = formData;
 
-  // Handle on form submit
-  const onFormSubmit = event => {
+  // Handle form submit for creating a Quote
+  const handleFormSubmit = async event => {
     event.preventDefault();
-    console.log('Form submitted!');
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      await axios.post('http://localhost:3001/quotes', formData, config);
+      setFormData({ author: '', body: '', source: '' });
+    } catch (error) {
+      console.log(error);
+    }
   };
 
-  // Handle on input change
+  // Set input values on the state
   const onInputChange = event => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -22,7 +33,7 @@ const CreateQupte = () => {
   return (
     <section>
       <h2>Crear Quote</h2>
-      <form onSubmit={e => onFormSubmit(e)}>
+      <form onSubmit={e => handleFormSubmit(e)}>
         <input
           type='text'
           placeholder='Author'
