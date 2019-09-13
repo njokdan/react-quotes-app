@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Card, Form, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 const CreateQuote = () => {
@@ -32,34 +33,55 @@ const CreateQuote = () => {
 
   return (
     <section>
-      <h2 className='text-capitalize'>create quote</h2>
-      <form onSubmit={e => handleFormSubmit(e)}>
-        <input
-          required
-          type='text'
-          placeholder='Author'
-          name='author'
-          value={author}
-          onChange={e => onInputChange(e)}
-        />
-        <textarea
-          required
-          cols='30'
-          rows='10'
-          name='body'
-          placeholder='Body'
-          value={body}
-          onChange={e => onInputChange(e)}></textarea>
-        <input
-          required
-          type='text'
-          placeholder='Source'
-          name='source'
-          value={source}
-          onChange={e => onInputChange(e)}
-        />
-        <button type='submit'>Create</button>
-      </form>
+      <Card className='border-0 shadow'>
+        <Card.Body>
+          <h2 className='text-capitalize m-0 mb-3'>create a quote</h2>
+          <Form onSubmit={e => handleFormSubmit(e)}>
+            <Form.Group controlId='exampleForm.ControlInput1'>
+              <Form.Label>Author</Form.Label>
+              <Form.Control
+                required
+                type='text'
+                placeholder='John Doe'
+                name='author'
+                value={author}
+                onChange={e => onInputChange(e)}
+              />
+            </Form.Group>
+            <Form.Group controlId='exampleForm.ControlTextarea1'>
+              <Form.Label>Body</Form.Label>
+              <Form.Control
+                as='textarea'
+                rows='3'
+                placeholder='Write or paste here some interesting text'
+                name='body'
+                value={body}
+                onChange={e => onInputChange(e)}
+              />
+            </Form.Group>
+
+            <Form.Group controlId='exampleForm.ControlInput1'>
+              <Form.Label>Source</Form.Label>
+              <Form.Control
+                required
+                type='text'
+                placeholder='http://[yoursource].com'
+                name='source'
+                value={source}
+                onChange={e => onInputChange(e)}
+              />
+            </Form.Group>
+            <Button
+              type='submit'
+              className='text-capitalize'
+              variant='primary'
+              size='md'
+              block>
+              Create
+            </Button>
+          </Form>
+        </Card.Body>
+      </Card>
     </section>
   );
 };

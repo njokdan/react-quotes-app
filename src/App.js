@@ -1,25 +1,37 @@
-import React from 'react';
-import { Container, Row, Col } from 'react-bootstrap';
-import Title from './components/Title';
-import QuoteList from './components/QuoteList/QuoteList';
-import CreateQuote from './components/CreateQuote';
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+import Dashboard from './components/Dashboard';
 
-function CCNQuotes() {
+import { QuoteProvider } from './context';
+
+function App() {
+  const [quotes, setQuotes] = useState(null);
+
+  useEffect(() => {
+    if (quotes) {
+      getQuotes();
+    }
+  });
+
+  // GET:::quotes
+  const getQuotes = async () => {
+    try {
+      const response = await axios.get('http://localhost:3001/quotes');
+      setQuotes(response.data);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
+  // PUT:::quote
+
+  // DELETE:::quote
+
   return (
-    <>
-      <Container>
-        <Title />
-        <Row>
-          <Col xs='12' lg='4'>
-            <CreateQuote />
-          </Col>
-          <Col xs='12' lg='8'>
-            <QuoteList />
-          </Col>
-        </Row>
-      </Container>
-    </>
+    <QuoteProvider value={{ quotes, getQuotes }}>
+      <Dashboard />
+    </QuoteProvider>
   );
 }
 
-export default CCNQuotes;
+export default App;
