@@ -1,15 +1,23 @@
 import React from 'react';
+import { Container, Row, Col } from 'react-bootstrap';
+import Title from './components/Title';
 import ListQuotes from './components/ListQuotes';
 import CreateQuote from './components/CreateQuote';
 
 function CCNQuotes() {
   return (
     <>
-      <h1>React Quotes App</h1>
-      <CreateQuote />
-      <br />
-      <br />
-      <ListQuotes />
+      <Container>
+        <Title />
+        <Row>
+          <Col xs='12' lg='4'>
+            <CreateQuote />
+          </Col>
+          <Col xs='12' lg='8'>
+            <ListQuotes />
+          </Col>
+        </Row>
+      </Container>
     </>
   );
 }

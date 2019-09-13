@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import axios from 'axios';
 
-const CreateQupte = () => {
+const CreateQuote = () => {
   const [formData, setFormData] = useState({
     author: '',
     body: '',
@@ -32,7 +32,7 @@ const CreateQupte = () => {
 
   return (
     <section>
-      <h2>Crear Quote</h2>
+      <h2 className='text-capitalize'>Create quote</h2>
       <form onSubmit={e => handleFormSubmit(e)}>
         <input
           required
@@ -64,4 +64,4 @@ const CreateQupte = () => {
   );
 };
 
-export default CreateQupte;
+export default CreateQuote;

@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { Card, Button } from 'react-bootstrap';
 import axios from 'axios';
 
 const ListQuotes = () => {
@@ -15,30 +16,34 @@ const ListQuotes = () => {
   };
 
   return (
-    <div>
-      <button onClick={() => handleGetQuotes()}>
-        Click here to get quotes!
-      </button>
-      {!quotes ? (
-        <p>No quotes to show up</p>
-      ) : (
-        quotes.map(quote => (
-          <div key={quote.id}>
-            <p>
-              <strong>{quote.author}</strong>
-            </p>
-            <p>{quote.body}</p>
-            <a
-              href={`${quote.source}`}
-              target='_blank'
-              rel='noopener noreferrer'>
-              {quote.source}
-            </a>
-            <hr />
-          </div>
-        ))
-      )}
-    </div>
+    <section>
+      <Button
+        variant='outline-primary'
+        size='lg'
+        onClick={() => handleGetQuotes()}>
+        Get Quotes
+      </Button>
+      {!quotes
+        ? ''
+        : quotes.map(quote => (
+            <Card
+              className='my-4 shadow-sm border-0 border-bottom'
+              key={quote.id}>
+              <Card.Body>
+                <Card.Text>{quote.body}</Card.Text>
+                <Card.Subtitle className='mb-2 text-muted'>
+                  - {quote.author}
+                </Card.Subtitle>
+                <Card.Link
+                  href={`${quote.source}`}
+                  target='_blank'
+                  rel='noopener noreferrer'>
+                  {quote.source}
+                </Card.Link>
+              </Card.Body>
+            </Card>
+          ))}
+    </section>
   );
 };
 
