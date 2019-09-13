@@ -1,10 +1,10 @@
 {
   "quotes": [
     {
-      "id": 1,
       "author": "Billy Connolly",
       "body": "Before you judge a man, walk a mile in his shoes. After that who cares?... He’s a mile away and you’ve got his shoes!",
-      "source": "http://billyconnolly.com/"
+      "source": "http://billyconnolly.com/",
+      "id": 1
     },
     {
       "id": 2,
@@ -59,6 +59,12 @@
       "author": "Linus Torvalds",
       "body": "I'm doing a free operating system (just a hobby, won't be big and professional like GNU).",
       "source": "https://en.wikipedia.org/wiki/Linus_Torvalds"
+    },
+    {
+      "author": "Jacobo Martinez",
+      "body": "El alma es un concepto muy abstracto y complicado.",
+      "source": "https://www.lifeder.com/refranes-dichos-venezolanos/",
+      "id": 11
     }
   ]
 }

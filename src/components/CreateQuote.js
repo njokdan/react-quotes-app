@@ -32,7 +32,7 @@ const CreateQuote = () => {
 
   return (
     <section>
-      <h2 className='text-capitalize'>Create quote</h2>
+      <h2 className='text-capitalize'>create quote</h2>
       <form onSubmit={e => handleFormSubmit(e)}>
         <input
           required
