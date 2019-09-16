@@ -23,12 +23,27 @@ function App() {
     }
   };
 
-  // PUT:::quote
+  // CREATE:::quote
+  const createQuote = async formData => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      await axios.post('http://localhost:3001/quotes', formData, config);
+      getQuotes();
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  // EDIT:::quote
 
   // DELETE:::quote
 
   return (
-    <QuoteProvider value={{ quotes, getQuotes }}>
+    <QuoteProvider value={{ quotes, getQuotes, createQuote }}>
       <Dashboard />
     </QuoteProvider>
   );

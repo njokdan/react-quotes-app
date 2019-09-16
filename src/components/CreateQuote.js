@@ -1,8 +1,10 @@
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 import { Card, Form, Button } from 'react-bootstrap';
-import axios from 'axios';
+
+import QuoteContext from '../context';
 
 const CreateQuote = () => {
+  const { createQuote } = useContext(QuoteContext);
   const [formData, setFormData] = useState({
     author: '',
     body: '',
@@ -11,22 +13,13 @@ const CreateQuote = () => {
   const { author, body, source } = formData;
 
   // Handle form submit for creating a Quote
-  const handleFormSubmit = async event => {
+  const handleFormSubmit = event => {
     event.preventDefault();
-    try {
-      const config = {
-        headers: {
-          'Content-Type': 'application/json'
-        }
-      };
-      await axios.post('http://localhost:3001/quotes', formData, config);
-      setFormData({ author: '', body: '', source: '' });
-    } catch (error) {
-      console.log(error);
-    }
+    createQuote(formData);
+    setFormData({ author: '', body: '', source: '' });
   };
 
-  // Set input values on the state
+  // Set input values on state
   const onInputChange = event => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
