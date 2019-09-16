@@ -8,11 +8,11 @@ function App() {
   const [quotes, setQuotes] = useState(null);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (quotes) {
-      getQuotes();
-    }
-  });
+  // useEffect(() => {
+  //   if (!!quotes) {
+  //     getQuotes();
+  //   }
+  // }, []);
 
   // GET:::quotes
   const getQuotes = async () => {
@@ -33,6 +33,7 @@ function App() {
         }
       };
       await axios.post('http://localhost:3001/quotes', formData, config);
+      getQuotes();
     } catch (error) {
       console.log(error);
     }
@@ -44,6 +45,7 @@ function App() {
   const deleteQuote = async id => {
     try {
       await axios.delete(`http://localhost:3001/quotes/${id}`);
+      getQuotes();
     } catch (error) {
       console.log(error);
     }

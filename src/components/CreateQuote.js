@@ -19,12 +19,11 @@ const CreateQuote = () => {
     event.preventDefault();
 
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      createQuote(formData);
-      setFormData({ author: '', body: '', source: '' });
-      getQuotes();
-    }, 400);
+
+    createQuote(formData);
+    setFormData({ author: '', body: '', source: '' });
+
+    setLoading(false);
   };
 
   // Set input values on state

@@ -13,16 +13,13 @@ const QuoteList = () => {
 
   const handleGetQuotes = () => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
-      getQuotes();
-    }, 500);
+    getQuotes();
+    setLoading(false);
   };
 
   const handleDeleteQuote = id => {
     if (window.confirm('Are you sure that you want to delete this quote?')) {
       deleteQuote(id);
-      getQuotes();
     }
   };
 
