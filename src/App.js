@@ -6,6 +6,7 @@ import { QuoteProvider } from './context';
 
 function App() {
   const [quotes, setQuotes] = useState(null);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (quotes) {
@@ -43,7 +44,8 @@ function App() {
   // DELETE:::quote
 
   return (
-    <QuoteProvider value={{ quotes, getQuotes, createQuote }}>
+    <QuoteProvider
+      value={{ quotes, getQuotes, createQuote, loading, setLoading }}>
       <Dashboard />
     </QuoteProvider>
   );

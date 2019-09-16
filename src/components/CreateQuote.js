@@ -1,10 +1,10 @@
 import React, { useState, useContext } from 'react';
-import { Card, Form, Button } from 'react-bootstrap';
+import { Card, Form, Button, Spinner } from 'react-bootstrap';
 
 import QuoteContext from '../context';
 
 const CreateQuote = () => {
-  const { createQuote } = useContext(QuoteContext);
+  const { createQuote, loading, setLoading } = useContext(QuoteContext);
   const [formData, setFormData] = useState({
     author: '',
     body: '',
@@ -15,8 +15,13 @@ const CreateQuote = () => {
   // Handle form submit for creating a Quote
   const handleFormSubmit = event => {
     event.preventDefault();
-    createQuote(formData);
-    setFormData({ author: '', body: '', source: '' });
+
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+      createQuote(formData);
+      setFormData({ author: '', body: '', source: '' });
+    }, 400);
   };
 
   // Set input values on state
@@ -64,14 +69,34 @@ const CreateQuote = () => {
                 onChange={e => onInputChange(e)}
               />
             </Form.Group>
-            <Button
-              type='submit'
-              className='text-capitalize'
-              variant='primary'
-              size='md'
-              block>
-              Create
-            </Button>
+
+            {/* Loader */}
+            {loading ? (
+              <Button
+                variant='primary'
+                className='text-capitalize'
+                size='md'
+                block
+                disabled>
+                <Spinner
+                  as='span'
+                  animation='grow'
+                  size='sm'
+                  role='status'
+                  aria-hidden='true'
+                />
+                Loading...
+              </Button>
+            ) : (
+              <Button
+                type='submit'
+                className='text-capitalize'
+                variant='primary'
+                size='md'
+                block>
+                Create
+              </Button>
+            )}
           </Form>
         </Card.Body>
       </Card>

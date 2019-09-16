@@ -9,14 +9,14 @@ const { quoteCard } = quoteListStyles;
 
 const QuoteList = () => {
   const { quotes, getQuotes } = useContext(QuoteContext);
-  const [loading, setLoading] = useState(false);
+  const { loading, setLoading } = useContext(QuoteContext);
 
   const handleGetQuotes = () => {
     setLoading(true);
     setTimeout(() => {
       setLoading(false);
       getQuotes();
-    }, 1000);
+    }, 700);
   };
 
   return (
