@@ -33,7 +33,6 @@ function App() {
         }
       };
       await axios.post('http://localhost:3001/quotes', formData, config);
-      getQuotes();
     } catch (error) {
       console.log(error);
     }
@@ -42,10 +41,24 @@ function App() {
   // EDIT:::quote
 
   // DELETE:::quote
+  const deleteQuote = async id => {
+    try {
+      await axios.delete(`http://localhost:3001/quotes/${id}`);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <QuoteProvider
-      value={{ quotes, getQuotes, createQuote, loading, setLoading }}>
+      value={{
+        quotes,
+        getQuotes,
+        createQuote,
+        deleteQuote,
+        loading,
+        setLoading
+      }}>
       <Dashboard />
     </QuoteProvider>
   );

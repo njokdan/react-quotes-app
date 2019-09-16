@@ -5,7 +5,7 @@ const Title = () => (
   <Row>
     <Col xs='12'>
       <section className='pt-4 pb-5'>
-        <h1 className='display-4 text-center font-weight-bold m-0'>
+        <h1 className='display-5 text-center font-weight-bold m-0'>
           Quotes App
         </h1>
       </section>

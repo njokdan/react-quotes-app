@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 import { Card, Button, Spinner, Image } from 'react-bootstrap';
 
 import QuoteContext from '../../context';
@@ -8,7 +8,7 @@ import quoteListStyles from './quoteList.module.scss';
 const { quoteCard } = quoteListStyles;
 
 const QuoteList = () => {
-  const { quotes, getQuotes } = useContext(QuoteContext);
+  const { quotes, getQuotes, deleteQuote } = useContext(QuoteContext);
   const { loading, setLoading } = useContext(QuoteContext);
 
   const handleGetQuotes = () => {
@@ -16,7 +16,14 @@ const QuoteList = () => {
     setTimeout(() => {
       setLoading(false);
       getQuotes();
-    }, 700);
+    }, 500);
+  };
+
+  const handleDeleteQuote = id => {
+    if (window.confirm('Are you sure that you want to delete this quote?')) {
+      deleteQuote(id);
+      getQuotes();
+    }
   };
 
   return (
@@ -50,13 +57,19 @@ const QuoteList = () => {
           <Card className={`${quoteCard}`} key={quote.id}>
             <Card.Body>
               <Card.Text>{quote.body}</Card.Text>
-              <Card.Subtitle className='mb-2 text-muted'>
+              <Card.Subtitle className='d-flex align-items-center justify-content-between mb-2 text-muted'>
                 <Card.Link
                   href={`${quote.source}`}
                   target='_blank'
                   rel='noopener noreferrer'>
                   - {quote.author}
                 </Card.Link>
+                <Button
+                  size='sm'
+                  variant='danger'
+                  onClick={() => handleDeleteQuote(quote.id)}>
+                  <i class='fas fa-trash-alt'></i>
+                </Button>
               </Card.Subtitle>
             </Card.Body>
           </Card>
