@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import axios from 'axios';
 import Dashboard from './components/Dashboard';
 
@@ -7,12 +7,6 @@ import { QuoteProvider } from './context';
 function App() {
   const [quotes, setQuotes] = useState(null);
   const [loading, setLoading] = useState(false);
-
-  // useEffect(() => {
-  //   if (!!quotes) {
-  //     getQuotes();
-  //   }
-  // }, []);
 
   // GET:::quotes
   const getQuotes = async () => {

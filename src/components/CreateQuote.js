@@ -4,9 +4,7 @@ import { Card, Form, Button, Spinner } from 'react-bootstrap';
 import QuoteContext from '../context';
 
 const CreateQuote = () => {
-  const { createQuote, getQuotes, loading, setLoading } = useContext(
-    QuoteContext
-  );
+  const { createQuote, loading, setLoading } = useContext(QuoteContext);
   const [formData, setFormData] = useState({
     author: '',
     body: '',
