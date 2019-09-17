@@ -55,7 +55,7 @@ const QuoteList = () => {
         quotes.map(quote => (
           <Card className={`${quoteCard}`} key={quote.id}>
             <Card.Body>
-              <Card.Text>{quote.body}</Card.Text>
+              <Card.Text>“{quote.body}”</Card.Text>
               <Card.Subtitle className='d-flex align-items-center justify-content-between mb-2 text-muted'>
                 <Card.Link
                   href={`${quote.source}`}
