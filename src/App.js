@@ -45,6 +45,7 @@ function App() {
     try {
       await axios.delete(`http://localhost:3001/quotes/${id}`);
       getQuotes();
+      window.scrollTo(0, 0);
     } catch (error) {
       console.log(error.message);
     }
