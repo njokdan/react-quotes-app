@@ -14,7 +14,7 @@ function App() {
       const response = await axios.get('http://localhost:3001/quotes');
       setQuotes(response.data);
     } catch (error) {
-      console.error(error);
+      console.log(error.message);
     }
   };
 
@@ -26,10 +26,15 @@ function App() {
           'Content-Type': 'application/json'
         }
       };
-      await axios.post('http://localhost:3001/quotes', formData, config);
+      const response = await axios.post(
+        'http://localhost:3001/quotes',
+        formData,
+        config
+      );
       getQuotes();
+      return response.data;
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 
@@ -41,7 +46,7 @@ function App() {
       await axios.delete(`http://localhost:3001/quotes/${id}`);
       getQuotes();
     } catch (error) {
-      console.log(error);
+      console.log(error.message);
     }
   };
 

@@ -1,10 +1,18 @@
 import React, { useState, useContext } from 'react';
-import { Card, Form, Button, Spinner } from 'react-bootstrap';
+import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
 
 import QuoteContext from '../context';
 
 const CreateQuote = () => {
+  // Context state and functions
   const { createQuote, loading, setLoading } = useContext(QuoteContext);
+
+  // Local state
+  const [alert, setAlert] = useState({
+    message: '',
+    type: ''
+  });
+
   const [formData, setFormData] = useState({
     author: '',
     body: '',
@@ -12,18 +20,41 @@ const CreateQuote = () => {
   });
   const { author, body, source } = formData;
 
-  // Handle form submit for creating a Quote
+  // Handle form submit
   const handleFormSubmit = async event => {
     event.preventDefault();
     setLoading(true);
 
-    await createQuote(formData);
+    const response = await createQuote(formData);
 
     setFormData({ author: '', body: '', source: '' });
     setLoading(false);
+    handleSetAlert(response);
   };
 
-  // Set input values on state
+  // Handle set and clear alert state
+  const handleSetAlert = response => {
+    if (!response) {
+      setAlert({
+        message: 'An error has occurred!',
+        type: 'danger'
+      });
+      clearAlert();
+    } else {
+      setAlert({
+        message: 'Quote created successfully!',
+        type: 'success'
+      });
+      clearAlert();
+    }
+  };
+  const clearAlert = () => {
+    setTimeout(() => {
+      setAlert({ message: '', type: '' });
+    }, 3000);
+  };
+
+  // Set input values to local state on input change
   const onInputChange = event => {
     setFormData({ ...formData, [event.target.name]: event.target.value });
   };
@@ -69,7 +100,7 @@ const CreateQuote = () => {
               />
             </Form.Group>
 
-            {/* Loader */}
+            {/* Spinner */}
             {loading ? (
               <Button
                 variant='primary'
@@ -95,6 +126,14 @@ const CreateQuote = () => {
                 block>
                 Create
               </Button>
+            )}
+
+            {alert.message && alert.type && (
+              <Alert
+                className='my-4 text-center text-capitalize'
+                variant={alert.type}>
+                {alert.message}
+              </Alert>
             )}
           </Form>
         </Card.Body>

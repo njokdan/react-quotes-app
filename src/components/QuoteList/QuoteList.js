@@ -67,7 +67,7 @@ const QuoteList = () => {
                   size='sm'
                   variant='danger'
                   onClick={() => handleDeleteQuote(quote.id)}>
-                  <i class='fas fa-trash-alt'></i>
+                  <i className='fas fa-trash-alt'></i>
                 </Button>
               </Card.Subtitle>
             </Card.Body>
