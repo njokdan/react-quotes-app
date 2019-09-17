@@ -13,14 +13,13 @@ const CreateQuote = () => {
   const { author, body, source } = formData;
 
   // Handle form submit for creating a Quote
-  const handleFormSubmit = event => {
+  const handleFormSubmit = async event => {
     event.preventDefault();
-
     setLoading(true);
 
-    createQuote(formData);
-    setFormData({ author: '', body: '', source: '' });
+    await createQuote(formData);
 
+    setFormData({ author: '', body: '', source: '' });
     setLoading(false);
   };
 

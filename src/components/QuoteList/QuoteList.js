@@ -11,9 +11,11 @@ const QuoteList = () => {
   const { quotes, getQuotes, deleteQuote } = useContext(QuoteContext);
   const { loading, setLoading } = useContext(QuoteContext);
 
-  const handleGetQuotes = () => {
+  const handleGetQuotes = async () => {
     setLoading(true);
-    getQuotes();
+
+    await getQuotes();
+
     setLoading(false);
   };
 
@@ -26,30 +28,30 @@ const QuoteList = () => {
   return (
     <section>
       {/* Header */}
-      <div className='d-flex align-items-center justify-content-center'>
-        {/* Listt Quotes Btn */}
-        <Button
-          className='text-capitalize mr-4'
-          variant='outline-primary'
-          size='lg'
-          onClick={() => handleGetQuotes()}>
-          {quotes ? 'refresh' : 'list quotes'}
-        </Button>
-        {/* Spinner Loader */}
-        {!quotes && loading && (
-          <Spinner animation='border' role='status' variant='primary'>
-            <span className='sr-only'>Loading...</span>
-          </Spinner>
-        )}
-      </div>
-
-      {/* Content */}
       {!quotes ? (
-        <div className='d-flex flex-column justify-content-center align-items-center'>
-          <h4 className='my-5 text-center'>No quotes to show up</h4>
-          <Image src='/assets/empty.svg' width='300' fluid />
-        </div>
+        <>
+          <div className='d-flex align-items-center justify-content-center'>
+            <Button
+              className='text-capitalize mr-4'
+              variant='outline-primary'
+              size='lg'
+              onClick={() => handleGetQuotes()}>
+              List quotes
+            </Button>
+            {loading && (
+              <Spinner animation='border' role='status' variant='primary'>
+                <span className='sr-only'>Loading...</span>
+              </Spinner>
+            )}
+          </div>
+
+          <div className='d-flex flex-column justify-content-center align-items-center'>
+            <h4 className='my-5 text-center'>No quotes to show up</h4>
+            <Image src='/assets/empty.svg' width='300' fluid />
+          </div>
+        </>
       ) : (
+        // Content
         quotes.map(quote => (
           <Card className={`${quoteCard}`} key={quote.id}>
             <Card.Body>
