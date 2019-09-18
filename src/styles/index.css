@@ -4,3 +4,9 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, Helvetica, Arial,
     sans-serif;
 }
+
+.form-validation-label {
+  font-size: 0.9rem;
+  color: #dc3545;
+  margin-top: 0.5rem;
+}

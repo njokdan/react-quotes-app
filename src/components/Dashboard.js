@@ -1,7 +1,7 @@
 import React from 'react';
 import { Container, Row, Col } from 'react-bootstrap';
 import Title from './Title';
-import CreateQuote from './CreateQuote';
+import CreateQuote from './CreateQuote/CreateQuote';
 import QuoteList from './QuoteList/QuoteList';
 
 const Dashboard = () => {

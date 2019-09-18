@@ -2,7 +2,11 @@ import React, { useState, useContext } from 'react';
 import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
 
 import useForm from 'react-hook-form';
-import QuoteContext from '../context';
+import QuoteContext from '../../context';
+
+// Import component styles
+import createQuoteStyles from './createQuote.module.scss';
+const { formStyle } = createQuoteStyles;
 
 const CreateQuote = () => {
   // Context API
@@ -67,7 +71,9 @@ const CreateQuote = () => {
           <h2 className='text-capitalize m-0 mb-3'>create a quote</h2>
 
           {/* Form */}
-          <Form onSubmit={handleSubmit(handleFormSubmit)}>
+          <Form
+            className={`${formStyle}`}
+            onSubmit={handleSubmit(handleFormSubmit)}>
             <Form.Group controlId='exampleForm.ControlInput1'>
               <Form.Label>Author</Form.Label>
               <Form.Control
@@ -77,7 +83,9 @@ const CreateQuote = () => {
                 ref={register({ required: true })}
               />
               {errors.author && errors.author.type === 'required' && (
-                <p>Please provide an author</p>
+                <p className='form-validation-label'>
+                  Please provide an author
+                </p>
               )}
             </Form.Group>
             <Form.Group controlId='exampleForm.ControlTextarea1'>
@@ -90,7 +98,7 @@ const CreateQuote = () => {
                 ref={register({ required: true })}
               />
               {errors.body && errors.body.type === 'required' && (
-                <p>Please provide a quote</p>
+                <p className='form-validation-label'>Please provide a quote</p>
               )}
             </Form.Group>
 
@@ -103,7 +111,7 @@ const CreateQuote = () => {
                 ref={register({ required: true })}
               />
               {errors.source && errors.source.type === 'required' && (
-                <p>Please provide a source</p>
+                <p className='form-validation-label'>Please provide a source</p>
               )}
             </Form.Group>
 
