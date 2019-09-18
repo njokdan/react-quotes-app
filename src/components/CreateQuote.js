@@ -1,80 +1,84 @@
 import React, { useState, useContext } from 'react';
 import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
 
+import useForm from 'react-hook-form';
 import QuoteContext from '../context';
 
 const CreateQuote = () => {
-  // Context state and functions
-  const { createQuote, loading, setLoading } = useContext(QuoteContext);
+  // Context API
+  const { createQuote } = useContext(QuoteContext);
 
-  // Local state
+  // Local State
+  const [loading, setLoading] = useState(false);
+
   const [alert, setAlert] = useState({
     message: '',
-    type: ''
+    type: '',
+    show: false
   });
 
-  const [formData, setFormData] = useState({
-    author: '',
-    body: '',
-    source: ''
-  });
-  const { author, body, source } = formData;
+  // Handle form submitting
+  const { register, handleSubmit, errors } = useForm();
 
-  // Handle form submit
-  const handleFormSubmit = async event => {
-    event.preventDefault();
-    setLoading(true);
-
-    const response = await createQuote(formData);
-
-    setFormData({ author: '', body: '', source: '' });
-    setLoading(false);
-    handleSetAlert(response);
+  const handleFormSubmit = async (data, e) => {
+    e.target.reset(); // standard reset after form submit
+    setLoading(true); // show loading spinner
+    const response = await createQuote(data); // wait until a Quote is created
+    handleSetAlert(response); // show alert based on the request response
   };
 
-  // Handle set and clear alert state
+  // Set alert message
   const handleSetAlert = response => {
     if (!response) {
       setAlert({
         message: 'An error has occurred!',
-        type: 'danger'
+        type: 'danger',
+        show: true
       });
-      clearAlert();
+      setLoading(false);
     } else {
       setAlert({
         message: 'Quote created successfully!',
-        type: 'success'
+        type: 'success',
+        show: true
       });
-      clearAlert();
+      setLoading(false);
     }
   };
-  const clearAlert = () => {
-    setTimeout(() => {
-      setAlert({ message: '', type: '' });
-    }, 3000);
-  };
 
-  // Set input values to local state on input change
-  const onInputChange = event => {
-    setFormData({ ...formData, [event.target.name]: event.target.value });
-  };
+  // Close alert message
+  const handleCloseAlert = () => setAlert({ ...alert, show: false });
 
   return (
     <section>
       <Card className='border-0 shadow'>
         <Card.Body>
+          {/* Alert */}
+          <Alert
+            className='mb-4'
+            dismissible
+            show={alert.show}
+            variant={alert.type || ''}
+            onClose={() => handleCloseAlert()}>
+            {alert.message || ''}
+          </Alert>
+
+          {/* Title */}
           <h2 className='text-capitalize m-0 mb-3'>create a quote</h2>
-          <Form onSubmit={e => handleFormSubmit(e)}>
+
+          {/* Form */}
+          <Form onSubmit={handleSubmit(handleFormSubmit)}>
             <Form.Group controlId='exampleForm.ControlInput1'>
               <Form.Label>Author</Form.Label>
               <Form.Control
-                required
                 type='text'
                 placeholder='John Doe'
                 name='author'
-                value={author}
-                onChange={e => onInputChange(e)}
+                ref={register({ required: true })}
               />
+              {errors.author && errors.author.type === 'required' && (
+                <p>Please provide an author</p>
+              )}
             </Form.Group>
             <Form.Group controlId='exampleForm.ControlTextarea1'>
               <Form.Label>Body</Form.Label>
@@ -83,21 +87,24 @@ const CreateQuote = () => {
                 rows='3'
                 placeholder='Write or paste here some interesting text'
                 name='body'
-                value={body}
-                onChange={e => onInputChange(e)}
+                ref={register({ required: true })}
               />
+              {errors.body && errors.body.type === 'required' && (
+                <p>Please provide a quote</p>
+              )}
             </Form.Group>
 
             <Form.Group controlId='exampleForm.ControlInput1'>
               <Form.Label>Source</Form.Label>
               <Form.Control
-                required
                 type='text'
                 placeholder='http://[yoursource].com'
                 name='source'
-                value={source}
-                onChange={e => onInputChange(e)}
+                ref={register({ required: true })}
               />
+              {errors.source && errors.source.type === 'required' && (
+                <p>Please provide a source</p>
+              )}
             </Form.Group>
 
             {/* Spinner */}
@@ -126,14 +133,6 @@ const CreateQuote = () => {
                 block>
                 Create
               </Button>
-            )}
-
-            {alert.message && alert.type && (
-              <Alert
-                className='my-4 text-center text-capitalize'
-                variant={alert.type}>
-                {alert.message}
-              </Alert>
             )}
           </Form>
         </Card.Body>

@@ -6,7 +6,6 @@ import { QuoteProvider } from './context';
 
 function App() {
   const [quotes, setQuotes] = useState(null);
-  const [loading, setLoading] = useState(false);
 
   // GET:::quotes
   const getQuotes = async () => {
@@ -57,9 +56,7 @@ function App() {
         quotes,
         getQuotes,
         createQuote,
-        deleteQuote,
-        loading,
-        setLoading
+        deleteQuote
       }}>
       <Dashboard />
     </QuoteProvider>

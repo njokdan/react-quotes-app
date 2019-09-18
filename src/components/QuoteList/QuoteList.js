@@ -1,24 +1,27 @@
-import React, { useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { Card, Button, Spinner, Image } from 'react-bootstrap';
 
 import QuoteContext from '../../context';
 
-// Import local component styles
+// Import component styles
 import quoteListStyles from './quoteList.module.scss';
 const { quoteCard } = quoteListStyles;
 
 const QuoteList = () => {
+  // Context API
   const { quotes, getQuotes, deleteQuote } = useContext(QuoteContext);
-  const { loading, setLoading } = useContext(QuoteContext);
 
+  // Local State
+  const [loading, setLoading] = useState(false);
+
+  // Get list of quotes
   const handleGetQuotes = async () => {
     setLoading(true);
-
     await getQuotes();
-
     setLoading(false);
   };
 
+  // Delete a quote by id
   const handleDeleteQuote = id => {
     if (window.confirm('Are you sure that you want to delete this quote?')) {
       deleteQuote(id);
