@@ -5,6 +5,15 @@ body {
     sans-serif;
 }
 
+form {
+  input,
+  textarea {
+    background-color: #f6f9fb;
+    border: none;
+    color: #4e585d;
+  }
+}
+
 .form-validation-label {
   font-size: 0.9rem;
   color: #dc3545;

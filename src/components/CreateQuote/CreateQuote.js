@@ -4,10 +4,6 @@ import { Card, Form, Button, Alert, Spinner } from 'react-bootstrap';
 import useForm from 'react-hook-form';
 import QuoteContext from '../../context';
 
-// Import component styles
-import createQuoteStyles from './createQuote.module.scss';
-const { formStyle } = createQuoteStyles;
-
 const CreateQuote = () => {
   // Context API
   const { createQuote } = useContext(QuoteContext);
@@ -54,7 +50,7 @@ const CreateQuote = () => {
   const handleCloseAlert = () => setAlert({ ...alert, show: false });
 
   return (
-    <section>
+    <section className='mb-5'>
       <Card className='border-0 shadow'>
         <Card.Body>
           {/* Alert */}
@@ -71,9 +67,7 @@ const CreateQuote = () => {
           <h2 className='text-capitalize m-0 mb-3'>create a quote</h2>
 
           {/* Form */}
-          <Form
-            className={`${formStyle}`}
-            onSubmit={handleSubmit(handleFormSubmit)}>
+          <Form onSubmit={handleSubmit(handleFormSubmit)}>
             <Form.Group controlId='exampleForm.ControlInput1'>
               <Form.Label>Author</Form.Label>
               <Form.Control

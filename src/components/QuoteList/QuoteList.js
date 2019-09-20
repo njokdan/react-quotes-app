@@ -1,5 +1,7 @@
 import React, { useState, useContext } from 'react';
-import { Card, Button, Spinner, Image } from 'react-bootstrap';
+import { Card, Button } from 'react-bootstrap';
+import EmptyQuotes from './EmptyQuotes';
+import EditQuote from '../EditQuote';
 
 import QuoteContext from '../../context';
 
@@ -9,15 +11,11 @@ const { quoteCard } = quoteListStyles;
 
 const QuoteList = () => {
   // Context API
-  const { quotes, getQuotes, editQuote, deleteQuote } = useContext(
-    QuoteContext
-  );
+  const { quotes, getQuotes } = useContext(QuoteContext);
 
   // Local State
   const [loading, setLoading] = useState(false);
-  const [edit, setEdit] = useState({
-    id: null
-  });
+  const [editing, setEditing] = useState({ id: '' });
 
   // Get list of quotes
   const handleGetQuotes = async () => {
@@ -26,82 +24,52 @@ const QuoteList = () => {
     setLoading(false);
   };
 
-  // Edit a quote by id
-  const handleEditQuote = id => {
-    setEdit({ id: id });
-  };
-
-  // Delete a quote by id
-  const handleDeleteQuote = id => {
-    if (window.confirm('Are you sure that you want to delete this quote?')) {
-      deleteQuote(id);
-    }
-  };
-
   return (
-    <section>
-      {/* Header */}
-      {!quotes ? (
-        <>
-          <div className='d-flex align-items-center justify-content-center'>
-            <Button
-              className='text-capitalize mr-4'
-              variant='outline-primary'
-              size='lg'
-              onClick={() => handleGetQuotes()}>
-              List quotes
-            </Button>
-            {loading && (
-              <Spinner animation='border' role='status' variant='primary'>
-                <span className='sr-only'>Loading...</span>
-              </Spinner>
-            )}
-          </div>
-
-          <div className='d-flex flex-column justify-content-center align-items-center'>
-            <h4 className='my-5 text-center'>No quotes to show up</h4>
-            <Image src='/assets/empty.svg' width='300' fluid />
-          </div>
-        </>
+    <>
+      {// If no quotes:
+      !quotes ? (
+        <EmptyQuotes handleGetQuotes={handleGetQuotes} loading={loading} />
       ) : (
-        // Content
-        quotes.map(quote => (
-          <Card className={`${quoteCard}`} key={quote.id}>
-            <Card.Body>
-              {/* Quote Body */}
-              <Card.Text>“{quote.body}”</Card.Text>
-
-              <Card.Subtitle className='d-flex align-items-center justify-content-between mb-2 text-muted'>
-                {/* Quote Author/Source */}
-                <Card.Link
-                  href={`${quote.source}`}
-                  target='_blank'
-                  rel='noopener noreferrer'>
-                  - {quote.author}
-                </Card.Link>
-
-                {/* Quote options */}
-                <div>
-                  <Button
-                    className='mr-2'
-                    size='sm'
-                    variant='warning'
-                    onClick={() => handleEditQuote(quote.id)}>
-                    <i class='fas fa-edit'></i>
-                  </Button>
-                  <Button
-                    size='sm'
-                    variant='danger'
-                    onClick={() => handleDeleteQuote(quote.id)}>
-                    <i className='fas fa-trash-alt'></i>
-                  </Button>
-                </div>
-              </Card.Subtitle>
-            </Card.Body>
-          </Card>
-        ))
+        // If quotes, show list
+        quotes.map(quote => {
+          // If a quote is on Edit mode, show edit form
+          if (editing.id === quote.id) {
+            return (
+              <Card className={`${quoteCard}`} key={quote.id}>
+                <Card.Body>
+                  <EditQuote quote={quote} setEditing={setEditing} />
+                </Card.Body>
+              </Card>
+            );
+          } else {
+            // If a quote is not on Edit mode, show normally
+            return (
+              <Card className={`${quoteCard}`} key={quote.id}>
+                <Card.Body>
+                  <Card.Text>“{quote.body}”</Card.Text>
+                  <Card.Subtitle className='d-flex align-items-center justify-content-between mb-2 text-muted'>
+                    <Card.Link
+                      href={`${quote.source}`}
+                      target='_blank'
+                      rel='noopener noreferrer'>
+                      - {quote.author}
+                    </Card.Link>
+                    <div>
+                      <Button
+                        size='sm'
+                        variant='primary'
+                        onClick={() => setEditing({ id: quote.id })}>
+                        <i className='fas fa-edit'></i>
+                      </Button>
+                    </div>
+                  </Card.Subtitle>
+                </Card.Body>
+              </Card>
+            );
+          }
+        })
       )}
-    </section>
+    </>
   );
 };
 

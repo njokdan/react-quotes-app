@@ -45,7 +45,7 @@ function App() {
           'Content-Type': 'application/json'
         }
       };
-      const response = await axios.post(
+      const response = await axios.patch(
         `http://localhost:3001/quotes/${id}`,
         formData,
         config
