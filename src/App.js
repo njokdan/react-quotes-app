@@ -38,6 +38,24 @@ function App() {
   };
 
   // EDIT:::quote
+  const editQuote = async (formData, id) => {
+    try {
+      const config = {
+        headers: {
+          'Content-Type': 'application/json'
+        }
+      };
+      const response = await axios.post(
+        `http://localhost:3001/quotes/${id}`,
+        formData,
+        config
+      );
+      getQuotes();
+      return response.data;
+    } catch (error) {
+      console.log(error.message);
+    }
+  };
 
   // DELETE:::quote
   const deleteQuote = async id => {
@@ -56,6 +74,7 @@ function App() {
         quotes,
         getQuotes,
         createQuote,
+        editQuote,
         deleteQuote
       }}>
       <Dashboard />

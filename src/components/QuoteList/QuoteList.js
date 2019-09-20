@@ -9,16 +9,26 @@ const { quoteCard } = quoteListStyles;
 
 const QuoteList = () => {
   // Context API
-  const { quotes, getQuotes, deleteQuote } = useContext(QuoteContext);
+  const { quotes, getQuotes, editQuote, deleteQuote } = useContext(
+    QuoteContext
+  );
 
   // Local State
   const [loading, setLoading] = useState(false);
+  const [edit, setEdit] = useState({
+    id: null
+  });
 
   // Get list of quotes
   const handleGetQuotes = async () => {
     setLoading(true);
     await getQuotes();
     setLoading(false);
+  };
+
+  // Edit a quote by id
+  const handleEditQuote = id => {
+    setEdit({ id: id });
   };
 
   // Delete a quote by id
@@ -58,20 +68,34 @@ const QuoteList = () => {
         quotes.map(quote => (
           <Card className={`${quoteCard}`} key={quote.id}>
             <Card.Body>
+              {/* Quote Body */}
               <Card.Text>“{quote.body}”</Card.Text>
+
               <Card.Subtitle className='d-flex align-items-center justify-content-between mb-2 text-muted'>
+                {/* Quote Author/Source */}
                 <Card.Link
                   href={`${quote.source}`}
                   target='_blank'
                   rel='noopener noreferrer'>
                   - {quote.author}
                 </Card.Link>
-                <Button
-                  size='sm'
-                  variant='danger'
-                  onClick={() => handleDeleteQuote(quote.id)}>
-                  <i className='fas fa-trash-alt'></i>
-                </Button>
+
+                {/* Quote options */}
+                <div>
+                  <Button
+                    className='mr-2'
+                    size='sm'
+                    variant='warning'
+                    onClick={() => handleEditQuote(quote.id)}>
+                    <i class='fas fa-edit'></i>
+                  </Button>
+                  <Button
+                    size='sm'
+                    variant='danger'
+                    onClick={() => handleDeleteQuote(quote.id)}>
+                    <i className='fas fa-trash-alt'></i>
+                  </Button>
+                </div>
               </Card.Subtitle>
             </Card.Body>
           </Card>
