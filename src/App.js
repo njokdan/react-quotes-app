@@ -22,8 +22,8 @@ function App() {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       };
       const response = await axios.post(
         'http://localhost:3001/quotes',
@@ -42,8 +42,8 @@ function App() {
     try {
       const config = {
         headers: {
-          'Content-Type': 'application/json'
-        }
+          'Content-Type': 'application/json',
+        },
       };
       const response = await axios.patch(
         `http://localhost:3001/quotes/${id}`,
@@ -75,8 +75,9 @@ function App() {
         getQuotes,
         createQuote,
         editQuote,
-        deleteQuote
-      }}>
+        deleteQuote,
+      }}
+    >
       <Dashboard />
     </QuoteProvider>
   );

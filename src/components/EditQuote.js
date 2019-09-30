@@ -28,54 +28,55 @@ const EditQuote = ({ quote, setEditing }) => {
   return (
     <Form onSubmit={handleSubmit(handleUpdateQuote)}>
       <Form.Control
-        type='hidden'
-        name='id'
+        type="hidden"
+        name="id"
         defaultValue={quote.id}
         ref={register({ required: false })}
       />
       <Form.Row>
-        <Col className='mb-3'>
+        <Col className="mb-3">
           <Form.Control
-            as='textarea'
-            rows='2'
-            name='body'
+            as="textarea"
+            rows="2"
+            name="body"
             defaultValue={quote.body}
             ref={register({ required: false })}
           />
         </Col>
       </Form.Row>
       <Form.Row>
-        <Col className='mb-3'>
+        <Col className="mb-3">
           <Form.Control
-            type='text'
-            name='author'
+            type="text"
+            name="author"
             defaultValue={quote.author}
             ref={register({ required: false })}
           />
         </Col>
-        <Col className='mb-3'>
+        <Col className="mb-3">
           <Form.Control
-            type='text'
-            name='source'
+            type="text"
+            name="source"
             defaultValue={quote.source}
             ref={register({ required: false })}
           />
         </Col>
       </Form.Row>
-      <div className='d-flex align-items-center justify-content-between mb-2'>
+      <div className="d-flex align-items-center justify-content-between mb-2">
         <div>
           <Button
-            className='mr-2'
-            size='sm'
-            variant='danger'
-            onClick={() => handleDeleteQuote(quote.id)}>
-            <i className='fas fa-trash-alt'></i>
+            className="mr-2"
+            size="sm"
+            variant="danger"
+            onClick={() => handleDeleteQuote(quote.id)}
+          >
+            <i className="fas fa-trash-alt"></i>
           </Button>
-          <Button size='sm' type='submit' variant='warning'>
+          <Button size="sm" type="submit" variant="warning">
             Update
           </Button>
         </div>
-        <Button size='md' type='submit' variant='link'>
+        <Button size="md" type="submit" variant="link">
           Go back
         </Button>
       </div>

@@ -7,6 +7,7 @@ import QuoteContext from '../../context';
 
 // Import component styles
 import quoteListStyles from './quoteList.module.scss';
+
 const { quoteCard } = quoteListStyles;
 
 const QuoteList = () => {
@@ -41,32 +42,33 @@ const QuoteList = () => {
                 </Card.Body>
               </Card>
             );
-          } else {
-            // If a quote is not on Edit mode, show normally
-            return (
-              <Card className={`${quoteCard}`} key={quote.id}>
-                <Card.Body>
-                  <Card.Text>“{quote.body}”</Card.Text>
-                  <Card.Subtitle className='d-flex align-items-center justify-content-between mb-2 text-muted'>
-                    <Card.Link
-                      href={`${quote.source}`}
-                      target='_blank'
-                      rel='noopener noreferrer'>
-                      - {quote.author}
-                    </Card.Link>
-                    <div>
-                      <Button
-                        size='sm'
-                        variant='primary'
-                        onClick={() => setEditing({ id: quote.id })}>
-                        <i className='fas fa-edit'></i>
-                      </Button>
-                    </div>
-                  </Card.Subtitle>
-                </Card.Body>
-              </Card>
-            );
           }
+          // If a quote is not on Edit mode, show normally
+          return (
+            <Card className={`${quoteCard}`} key={quote.id}>
+              <Card.Body>
+                <Card.Text>“{quote.body}”</Card.Text>
+                <Card.Subtitle className="d-flex align-items-center justify-content-between mb-2 text-muted">
+                  <Card.Link
+                    href={`${quote.source}`}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                  >
+                    - {quote.author}
+                  </Card.Link>
+                  <div>
+                    <Button
+                      size="sm"
+                      variant="primary"
+                      onClick={() => setEditing({ id: quote.id })}
+                    >
+                      <i className="fas fa-edit"></i>
+                    </Button>
+                  </div>
+                </Card.Subtitle>
+              </Card.Body>
+            </Card>
+          );
         })
       )}
     </>
