@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import { Card, Button } from 'react-bootstrap';
 import EmptyQuotes from './EmptyQuotes';
-import EditQuote from '../EditQuote';
+import EditQuote from './EditQuote';
 
 import QuoteContext from '../../context';
 
@@ -26,7 +26,7 @@ const QuoteList = () => {
   };
 
   return (
-    <>
+    <section id="quote-list">
       {// If no quotes:
       !quotes ? (
         <EmptyQuotes handleGetQuotes={handleGetQuotes} loading={loading} />
@@ -62,7 +62,7 @@ const QuoteList = () => {
                       variant="primary"
                       onClick={() => setEditing({ id: quote.id })}
                     >
-                      <i className="fas fa-edit"></i>
+                      <i className="fas fa-edit" />
                     </Button>
                   </div>
                 </Card.Subtitle>
@@ -71,7 +71,7 @@ const QuoteList = () => {
           );
         })
       )}
-    </>
+    </section>
   );
 };
 

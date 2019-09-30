@@ -1,10 +1,12 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Button, Spinner, Image } from 'react-bootstrap';
 
 const EmptyQuotes = ({ handleGetQuotes, loading }) => (
   <section>
     <div className="d-flex align-items-center justify-content-center">
       <Button
+        id="list-quotes"
         className="text-capitalize mr-4"
         variant="outline-primary"
         size="lg"
@@ -24,5 +26,10 @@ const EmptyQuotes = ({ handleGetQuotes, loading }) => (
     </div>
   </section>
 );
+
+EmptyQuotes.propTypes = {
+  handleGetQuotes: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+};
 
 export default EmptyQuotes;

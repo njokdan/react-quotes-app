@@ -17,16 +17,6 @@ const CreateQuote = () => {
     show: false,
   });
 
-  // Handle form submitting
-  const { register, handleSubmit, errors } = useForm();
-
-  const handleFormSubmit = async (data, e) => {
-    e.target.reset(); // standard reset after form submit
-    setLoading(true); // show loading spinner
-    const response = await createQuote(data); // wait until a Quote is created
-    handleSetAlert(response); // show alert based on the request response
-  };
-
   // Set alert message
   const handleSetAlert = response => {
     if (!response) {
@@ -49,6 +39,16 @@ const CreateQuote = () => {
   // Close alert message
   const handleCloseAlert = () => setAlert({ ...alert, show: false });
 
+  // Handle form submitting
+  const { register, handleSubmit, errors } = useForm();
+
+  const handleFormSubmit = async (data, e) => {
+    e.target.reset(); // standard reset after form submit
+    setLoading(true); // show loading spinner
+    const response = await createQuote(data); // wait until a Quote is created
+    handleSetAlert(response); // show alert based on the request response
+  };
+
   return (
     <section className="mb-5">
       <Card className="border-0 shadow">
@@ -68,7 +68,7 @@ const CreateQuote = () => {
           <h2 className="text-capitalize m-0 mb-3">create a quote</h2>
 
           {/* Form */}
-          <Form onSubmit={handleSubmit(handleFormSubmit)}>
+          <Form id="create-quote" onSubmit={handleSubmit(handleFormSubmit)}>
             <Form.Group controlId="exampleForm.ControlInput1">
               <Form.Label>Author</Form.Label>
               <Form.Control

@@ -1,25 +1,15 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add("login", (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add("drag", { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add("dismiss", { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This is will overwrite an existing command --
-// Cypress.Commands.overwrite("visit", (originalFn, url, options) => { ... })
+/* eslint-disable no-undef */
+
+// Fullfil create-quote-form
+Cypress.Commands.add('fillCreateQuote', (author, body, source) => {
+  cy.get('input[name="author"]').type(author);
+  cy.get('textarea[name="body"]').type(body);
+  cy.get('input[name="source"]').type(source);
+});
+
+// Check empty values for create-quote-form
+Cypress.Commands.add('emptyCreateQuoteForm', () => {
+  cy.get('input[name="author"]').should('have.value', '');
+  cy.get('textarea[name="body"]').should('have.value', '');
+  cy.get('input[name="source"]').should('have.value', '');
+});

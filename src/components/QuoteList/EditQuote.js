@@ -1,21 +1,22 @@
 import React, { useContext } from 'react';
+import PropTypes from 'prop-types';
 import { Form, Col, Button } from 'react-bootstrap';
 
 import useForm from 'react-hook-form';
-import QuoteContext from '../context';
+import QuoteContext from '../../context';
 
 const EditQuote = ({ quote, setEditing }) => {
   // Context API
   const { editQuote, deleteQuote } = useContext(QuoteContext);
 
-  // Update a quote by id
+  // // Handle form submitting and edit selected quote
   const { register, handleSubmit } = useForm();
+
   const handleUpdateQuote = async data => {
     const { id } = data; // get quote id
     delete data.id; // separate data from id
     await editQuote(data, id); // wait until a Quote is updated
     setEditing({ id: '' }); // clear editing mode
-    // handleSetAlert(response);
   };
 
   // Delete a quote by id
@@ -70,7 +71,7 @@ const EditQuote = ({ quote, setEditing }) => {
             variant="danger"
             onClick={() => handleDeleteQuote(quote.id)}
           >
-            <i className="fas fa-trash-alt"></i>
+            <i className="fas fa-trash-alt" />
           </Button>
           <Button size="sm" type="submit" variant="warning">
             Update
@@ -82,6 +83,11 @@ const EditQuote = ({ quote, setEditing }) => {
       </div>
     </Form>
   );
+};
+
+EditQuote.propTypes = {
+  quote: PropTypes.object.isRequired,
+  setEditing: PropTypes.func.isRequired,
 };
 
 export default EditQuote;
