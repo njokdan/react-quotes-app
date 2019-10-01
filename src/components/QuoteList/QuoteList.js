@@ -58,6 +58,7 @@ const QuoteList = () => {
                   </Card.Link>
                   <div>
                     <Button
+                      id="toggle-edit-quote"
                       size="sm"
                       variant="primary"
                       onClick={() => setEditing({ id: quote.id })}

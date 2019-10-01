@@ -27,7 +27,7 @@ const EditQuote = ({ quote, setEditing }) => {
   };
 
   return (
-    <Form onSubmit={handleSubmit(handleUpdateQuote)}>
+    <Form id="edit-quote" onSubmit={handleSubmit(handleUpdateQuote)}>
       <Form.Control
         type="hidden"
         name="id"
@@ -66,6 +66,7 @@ const EditQuote = ({ quote, setEditing }) => {
       <div className="d-flex align-items-center justify-content-between mb-2">
         <div>
           <Button
+            id="remove-quote"
             className="mr-2"
             size="sm"
             variant="danger"
