@@ -1,16 +1,10 @@
 {
   "quotes": [
     {
-      "author": "Billy Connolly",
-      "body": "Before you judge a man, walk a mile in his shoes. After that who cares?... He’s a mile away and you’ve got his shoes!",
-      "source": "http://billyconnolly.com/",
-      "id": 1
-    },
-    {
       "id": 2,
-      "author": "Jeff Sickel",
-      "body": "Deleted code is debugged code.",
-      "source": "http://www.defprogramming.com/quotes-by/jeff-sickel/"
+      "author": "Updated Author",
+      "body": "Updated Body",
+      "source": "https://google.com/"
     },
     {
       "id": 3,
@@ -59,6 +53,12 @@
       "author": "Linus Torvalds",
       "body": "I'm doing a free operating system (just a hobby, won't be big and professional like GNU).",
       "source": "https://en.wikipedia.org/wiki/Linus_Torvalds"
+    },
+    {
+      "author": "Jacobo",
+      "body": "A loremp ipsum sample text",
+      "source": "https://google.com",
+      "id": 11
     }
   ]
 }

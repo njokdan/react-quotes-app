@@ -9,7 +9,7 @@ const EditQuote = ({ quote, setEditing }) => {
   // Context API
   const { editQuote, deleteQuote } = useContext(QuoteContext);
 
-  // // Handle form submitting and edit selected quote
+  // Handle form submitting and edit selected quote
   const { register, handleSubmit } = useForm();
 
   const handleUpdateQuote = async data => {

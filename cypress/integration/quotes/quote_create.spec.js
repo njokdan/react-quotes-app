@@ -6,11 +6,7 @@ describe('Create a quote', () => {
 
   it('should create a quote and get list of quotes', () => {
     // 1 - fullfill the create a quote form
-    cy.fillCreateQuote(
-      'Jacobo',
-      'A loremp ipsum sample text',
-      'https://google.com'
-    );
+    cy.fillQuote('Jacobo', 'A loremp ipsum sample text', 'https://google.com');
 
     // 2 - submit the form
     cy.get('#create-quote').submit();
