@@ -32,45 +32,47 @@ const QuoteList = () => {
         <EmptyQuotes handleGetQuotes={handleGetQuotes} loading={loading} />
       ) : (
         // If quotes, show list
-        quotes.map(quote => {
-          // If a quote is on Edit mode, show edit form
-          if (editing.id === quote.id) {
+        quotes
+          .sort((a, b) => b.id - a.id)
+          .map(quote => {
+            // If a quote is on Edit mode, show edit form
+            if (editing.id === quote.id) {
+              return (
+                <Card className={`${quoteCard}`} key={quote.id}>
+                  <Card.Body>
+                    <EditQuote quote={quote} setEditing={setEditing} />
+                  </Card.Body>
+                </Card>
+              );
+            }
+            // If a quote is not on Edit mode, show normally
             return (
               <Card className={`${quoteCard}`} key={quote.id}>
                 <Card.Body>
-                  <EditQuote quote={quote} setEditing={setEditing} />
+                  <Card.Text>“{quote.body}”</Card.Text>
+                  <Card.Subtitle className="d-flex align-items-center justify-content-between mb-2 text-muted">
+                    <Card.Link
+                      href={`${quote.source}`}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                    >
+                      - {quote.author}
+                    </Card.Link>
+                    <div>
+                      <Button
+                        id="toggle-edit-quote"
+                        size="sm"
+                        variant="primary"
+                        onClick={() => setEditing({ id: quote.id })}
+                      >
+                        <i className="fa fa-pencil" aria-hidden="true" />
+                      </Button>
+                    </div>
+                  </Card.Subtitle>
                 </Card.Body>
               </Card>
             );
-          }
-          // If a quote is not on Edit mode, show normally
-          return (
-            <Card className={`${quoteCard}`} key={quote.id}>
-              <Card.Body>
-                <Card.Text>“{quote.body}”</Card.Text>
-                <Card.Subtitle className="d-flex align-items-center justify-content-between mb-2 text-muted">
-                  <Card.Link
-                    href={`${quote.source}`}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    - {quote.author}
-                  </Card.Link>
-                  <div>
-                    <Button
-                      id="toggle-edit-quote"
-                      size="sm"
-                      variant="primary"
-                      onClick={() => setEditing({ id: quote.id })}
-                    >
-                      <i className="fa fa-pencil" aria-hidden="true" />
-                    </Button>
-                  </div>
-                </Card.Subtitle>
-              </Card.Body>
-            </Card>
-          );
-        })
+          })
       )}
     </section>
   );
