@@ -26,6 +26,11 @@ const EditQuote = ({ quote, setEditing }) => {
     }
   };
 
+  // Handle hide editing mode
+  const handleHideEdit = () => {
+    setEditing({ id: '' });
+  };
+
   return (
     <Form id="edit-quote" onSubmit={handleSubmit(handleUpdateQuote)}>
       <Form.Control
@@ -72,13 +77,13 @@ const EditQuote = ({ quote, setEditing }) => {
             variant="danger"
             onClick={() => handleDeleteQuote(quote.id)}
           >
-            <i className="fas fa-trash-alt" />
+            <i className="fa fa-trash" aria-hidden="true" />
           </Button>
           <Button size="sm" type="submit" variant="warning">
             Update
           </Button>
         </div>
-        <Button size="md" type="submit" variant="link">
+        <Button size="md" variant="link" onClick={() => handleHideEdit()}>
           Go back
         </Button>
       </div>

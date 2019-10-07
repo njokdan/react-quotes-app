@@ -20,7 +20,7 @@ describe('Edit a quote', () => {
         cy.get('#edit-quote').should('be.visible');
       });
 
-    // Add new information on the quote
+    // 4 - Add new information on the quote
     cy.get('#edit-quote input[name="author"]')
       .clear()
       .type('Updated Author');
@@ -31,10 +31,10 @@ describe('Edit a quote', () => {
       .clear()
       .type('https://google.com/');
 
-    // 4 - submit the form to update the quote
+    // 5 - submit the form to update the quote
     cy.get('#edit-quote').submit();
 
-    // 5 - once the quote is update, validate that the edit-form is already gone
+    // 6 - once the quote is update, validate that the edit-form is already gone
     cy.get('#quote-list')
       .children()
       .should('not.have.id', 'edit-quote');

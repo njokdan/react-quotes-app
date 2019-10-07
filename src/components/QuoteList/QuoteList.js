@@ -63,7 +63,7 @@ const QuoteList = () => {
                       variant="primary"
                       onClick={() => setEditing({ id: quote.id })}
                     >
-                      <i className="fas fa-edit" />
+                      <i className="fa fa-pencil" aria-hidden="true" />
                     </Button>
                   </div>
                 </Card.Subtitle>
